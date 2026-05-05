@@ -1,0 +1,218 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── JOUEURS & CARTES ──────────────────────────────────────────
+
+model Player {
+  id          String    @id @default(cuid())
+  eaId        String?   @unique
+  firstName   String
+  lastName    String
+  fullName    String
+  nationality String    @default("CAN")
+  birthDate   DateTime?
+  position    Position
+  handedness  Handedness @default(RIGHT)
+
+  teamId      String
+  team        Team      @relation(fields: [teamId], references: [id])
+  leagueId    String
+  league      League    @relation(fields: [leagueId], references: [id])
+
+  cards       Card[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([fullName])
+  @@index([position])
+  @@index([teamId])
+}
+
+model Card {
+  id          String    @id @default(cuid())
+  playerId    String
+  player      Player    @relation(fields: [playerId], references: [id])
+
+  cardType    CardType
+  overall     Int
+  season      String    @default("NHL26")
+  version     String?
+  imageUrl    String?
+  isActive    Boolean   @default(true)
+  releaseDate DateTime?
+
+  // Attributs globaux (1-99)
+  skating     Int?
+  shooting    Int?
+  passing     Int?
+  checking    Int?
+  defense     Int?
+  puckSkills  Int?
+  physical    Int?
+
+  // Stats détaillées stockées en JSON
+  detailedStats Json?
+
+  priceHistory  PriceEntry[]
+  priceStats    PriceStats?
+  submissions   PriceSubmission[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([overall])
+  @@index([cardType])
+  @@index([playerId])
+  @@index([isActive])
+}
+
+enum Position {
+  C
+  LW
+  RW
+  D
+  G
+}
+
+enum Handedness {
+  LEFT
+  RIGHT
+}
+
+enum CardType {
+  BASE
+  TOTW
+  TOTY
+  EVENT
+  FLASHBACK
+  ICON
+  ULTIMATE
+  FANTASY
+  PROMO
+  HERO
+}
+
+model Team {
+  id       String   @id @default(cuid())
+  name     String   @unique
+  abbrev   String   @unique
+  city     String?
+  logoUrl  String?
+  leagueId String
+  league   League   @relation(fields: [leagueId], references: [id])
+  players  Player[]
+}
+
+model League {
+  id      String   @id @default(cuid())
+  name    String   @unique
+  abbrev  String   @unique
+  teams   Team[]
+  players Player[]
+}
+
+// ─── SYSTÈME DE PRIX ───────────────────────────────────────────
+
+model PriceSubmission {
+  id         String   @id @default(cuid())
+  cardId     String
+  card       Card     @relation(fields: [cardId], references: [id])
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  price      Int
+  platform   Platform
+  isValid    Boolean  @default(true)
+  confidence Float    @default(1.0)
+  createdAt  DateTime @default(now())
+
+  @@index([cardId, platform, createdAt])
+  @@index([userId])
+}
+
+// Snapshot calculé (cron toutes les 2h)
+model PriceStats {
+  id          String   @id @default(cuid())
+  cardId      String   @unique
+  card        Card     @relation(fields: [cardId], references: [id])
+  platform    Platform @default(PS5)
+  priceAvg    Int?
+  priceMin    Int?
+  priceMax    Int?
+  priceMedian Int?
+  trend       Trend    @default(STABLE)
+  trendPct    Float    @default(0)
+  sampleSize  Int      @default(0)
+  updatedAt   DateTime @updatedAt
+}
+
+// Historique archivé
+model PriceEntry {
+  id         String   @id @default(cuid())
+  cardId     String
+  card       Card     @relation(fields: [cardId], references: [id])
+  platform   Platform
+  priceAvg   Int
+  priceMin   Int
+  priceMax   Int
+  sampleSize Int
+  recordedAt DateTime @default(now())
+
+  @@index([cardId, platform, recordedAt])
+}
+
+enum Platform {
+  PS5
+  XBOX
+  PC
+}
+
+enum Trend {
+  UP
+  DOWN
+  STABLE
+}
+
+// ─── UTILISATEURS ──────────────────────────────────────────────
+
+model User {
+  id               String   @id @default(cuid())
+  email            String   @unique
+  username         String   @unique
+  passwordHash     String?
+  role             Role     @default(USER)
+  reliabilityScore Float    @default(0.5)
+  submissionCount  Int      @default(0)
+  acceptedCount    Int      @default(0)
+
+  submissions      PriceSubmission[]
+  sessions         Session[]
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([token])
+  @@index([userId])
+}
+
+enum Role {
+  USER
+  CONTRIBUTOR
+  MODERATOR
+  ADMIN
+}
