@@ -22,14 +22,16 @@ export default async function CardPage({
   params,
   searchParams,
 }: {
-  params: { id: string }
-  searchParams: { platform?: string }
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ platform?: string }>
 }) {
-  const platform = searchParams.platform ?? 'PS5'
+  const { id } = await params
+  const { platform: platformParam } = await searchParams
+  const platform = platformParam ?? 'PS5'
 
   const [card, priceHistory] = await Promise.all([
-    apiFetch<Card>(`/cards/${params.id}`, { next: { revalidate: 300 } }).catch(() => null),
-    apiFetch<PriceEntry[]>(`/cards/${params.id}/prices?platform=${platform}&days=30`, {
+    apiFetch<Card>(`/cards/${id}`, { next: { revalidate: 300 } }).catch(() => null),
+    apiFetch<PriceEntry[]>(`/cards/${id}/prices?platform=${platform}&days=30`, {
       next: { revalidate: 600 },
     }).catch(() => [] as PriceEntry[]),
   ])
