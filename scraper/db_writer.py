@@ -19,8 +19,7 @@ import logging
 from datetime import datetime, timezone
 from typing import Any
 
-import psycopg2
-import psycopg2.extras
+import psycopg
 
 from config import DATABASE_URL
 
@@ -49,8 +48,7 @@ class DBWriter:
     """Manages all PostgreSQL write operations for the scraper."""
 
     def __init__(self) -> None:
-        self.conn = psycopg2.connect(DATABASE_URL)
-        self.conn.autocommit = False
+        self.conn = psycopg.connect(DATABASE_URL, autocommit=False)
         logger.info("Connected to PostgreSQL at %s", DATABASE_URL.split("@")[-1])
 
     def close(self) -> None:
