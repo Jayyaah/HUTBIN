@@ -1,0 +1,1 @@
+# HUTbin scraper package
