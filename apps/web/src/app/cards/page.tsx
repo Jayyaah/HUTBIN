@@ -8,9 +8,10 @@ type SearchParams = {
   platform?: string; sort?: string; page?: string
 }
 
-export default async function CardsPage({ searchParams }: { searchParams: SearchParams }) {
+export default async function CardsPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
+  const searchParamsResolved = await searchParams
   const params = new URLSearchParams()
-  Object.entries(searchParams).forEach(([k, v]) => { if (v) params.set(k, v) })
+  Object.entries(searchParamsResolved).forEach(([k, v]) => { if (v) params.set(k, v) })
 
   const data = await apiFetch<CardListResponse>(`/cards?${params.toString()}`, {
     next: { revalidate: 60 },
@@ -22,9 +23,9 @@ export default async function CardsPage({ searchParams }: { searchParams: Search
         <h1 className="text-2xl font-bold">Cards</h1>
         <span className="text-sm text-gray-400">{data.meta.total} cards</span>
       </div>
-      <CardFilters current={searchParams} />
+      <CardFilters current={searchParamsResolved} />
       <CardGrid cards={data.data} />
-      <Pagination meta={data.meta} current={searchParams} />
+      <Pagination meta={data.meta} current={searchParamsResolved} />
     </div>
   )
 }
