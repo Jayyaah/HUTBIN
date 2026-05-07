@@ -34,3 +34,33 @@ export type CardListResponse = {
   data: Card[]
   meta: { total: number; page: number; limit: number; totalPages: number }
 }
+
+export type PlayerCard = {
+  id: string
+  overall: number
+  cardType: string
+  version?: string
+  imageUrl?: string
+  skating?: number; shooting?: number; passing?: number
+  checking?: number; defense?: number; puckSkills?: number; physical?: number
+  priceStats?: { priceAvg?: number; priceMin?: number; priceMax?: number; trend: string; trendPct: number; sampleSize: number }
+}
+
+export type Player = {
+  id: string
+  firstName: string
+  lastName: string
+  fullName: string
+  position: string
+  nationality: string
+  handedness: string
+  birthDate?: string
+  team: { id: string; name: string; abbrev: string }
+  league?: { id: string; name: string; abbrev: string }
+  cards: PlayerCard[]
+}
+
+export type PlayerListResponse = {
+  data: Player[]
+  meta: { total: number; page: number; limit: number }
+}
