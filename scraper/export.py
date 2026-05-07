@@ -13,8 +13,8 @@ import logging
 from pathlib import Path
 from typing import Any
 
-import psycopg2
-import psycopg2.extras
+import psycopg
+import psycopg.rows
 
 from config import DATABASE_URL
 
@@ -63,7 +63,7 @@ ORDER BY c.overall DESC, p."fullName"
 
 
 def _connect():
-    return psycopg2.connect(DATABASE_URL, cursor_factory=psycopg2.extras.RealDictCursor)
+    return psycopg.connect(DATABASE_URL, row_factory=psycopg.rows.dict_row)
 
 
 def _build_where(
