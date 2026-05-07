@@ -1,4 +1,43 @@
 # HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
+# HUTBIN — Getting Started
 
 ## Prérequis
 - Node.js 20+
@@ -11,6 +50,153 @@ cp .env.example .env
 cp packages/database/.env.example packages/database/.env
 ```
 
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
+## 2. Démarrer PostgreSQL
 ## 2. Démarrer PostgreSQL
 ```bash
 docker compose up -d
@@ -43,7 +229,6 @@ cd apps/web && npm run dev
 cd scraper
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-playwright install chromium
 
 # Inspecter la structure du site (identifier les sélecteurs CSS)
 python main.py --probe
@@ -51,6 +236,11 @@ python main.py --probe
 # Lancer le scrape complet
 python main.py --source hutdb --platform PS5
 ```
+
+> **Playwright (optionnel)** — uniquement si `--probe` indique que le site est rendu en JavaScript :
+> ```bash
+> pip install "playwright>=1.45" && playwright install chromium
+> ```
 
 ## 7. Automatisation du scraper (cron)
 Le scraper tourne automatiquement chaque nuit à **3h17** via cron système.
