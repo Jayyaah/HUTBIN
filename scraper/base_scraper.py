@@ -10,6 +10,7 @@ import json
 import logging
 import random
 import time
+from pathlib import Path
 from typing import Any
 
 import requests
@@ -139,10 +140,18 @@ class BaseScraper(abc.ABC):
         print(f"PROBE: {url}")
         print(f"{'='*70}\n")
 
-        html = self.fetch_html(url)
+        html, api_calls = self._probe_playwright(url)
         if not html:
             print("[ERROR] Could not fetch page.")
             return
+
+        if api_calls:
+            print(f"🌐 API/XHR calls intercepted ({len(api_calls)}):")
+            for req_url, body_preview in api_calls:
+                print(f"  GET {req_url}")
+                if body_preview:
+                    print(f"      → {body_preview[:200]}")
+            print()
 
         soup = BeautifulSoup(html, "lxml")
 
@@ -158,16 +167,17 @@ class BaseScraper(abc.ABC):
             print("Full __NEXT_DATA__ (first 3000 chars):")
             print(json.dumps(next_data, indent=2)[:3000])
         else:
-            print("❌ No __NEXT_DATA__ — static HTML parsing needed.\n")
+            print("❌ No __NEXT_DATA__ — checking for inline JSON blobs.\n")
+            for script in soup.find_all("script"):
+                text = script.string or ""
+                if len(text) > 200 and any(k in text for k in ("players", "cards", "ovr", "overall")):
+                    print(f"  Possible data script (first 300 chars): {text[:300]}\n")
 
-        # 2. All unique class names (top 30)
-        classes: set[str] = set()
-        for tag in soup.find_all(class_=True):
-            for c in tag.get("class", []):
-                classes.add(c)
-        print(f"\nUnique CSS classes ({len(classes)} total, showing first 50):")
-        for c in sorted(classes)[:50]:
-            print(f"  .{c}")
+        # 2. All <a> links on the page
+        all_links = [a["href"] for a in soup.find_all("a", href=True)]
+        print(f"\nAll links ({len(all_links)} total, first 30):")
+        for href in all_links[:30]:
+            print(f"  {href}")
 
         # 3. data-* attributes
         data_attrs: set[str] = set()
@@ -176,19 +186,60 @@ class BaseScraper(abc.ABC):
                 if attr.startswith("data-"):
                     data_attrs.add(f"{attr}={tag[attr]!r}")
         if data_attrs:
-            print(f"\ndata-* attributes (first 30):")
-            for a in sorted(data_attrs)[:30]:
+            print(f"\ndata-* attributes:")
+            for a in sorted(data_attrs):
                 print(f"  {a}")
 
-        # 4. First <a> links that look like player URLs
-        print("\nLinks containing 'player' or 'card':")
-        for a in soup.find_all("a", href=True)[:50]:
-            href = a["href"]
-            if any(k in href.lower() for k in ("player", "card", "/26/")):
-                print(f"  {href}")
+        # 4. Raw HTML saved to file for manual inspection
+        probe_path = Path(__file__).parent / "probe_output.html"
+        probe_path.write_text(html, encoding="utf-8")
+        print(f"\n💾 Full rendered HTML saved to: {probe_path}")
+        print(f"   (open in browser or inspect with grep/search)")
+        print(f"\n--- RAW HTML (first 2000 chars) ---\n{html[:2000]}")
 
-        # 5. Raw HTML (truncated)
-        print(f"\n--- RAW HTML (first 4000 chars) ---\n{html[:4000]}")
+    def _probe_playwright(self, url: str) -> tuple[str, list[tuple[str, str]]]:
+        """Use Playwright to load the page and capture XHR/fetch API calls."""
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            logger.error("Playwright not installed.")
+            return "", []
+
+        api_calls: list[tuple[str, str]] = []
+        html = ""
+        try:
+            with sync_playwright() as pw:
+                browser = pw.chromium.launch(headless=True)
+                page = browser.new_page()
+                page.set_extra_http_headers(_BROWSER_HEADERS)
+
+                def on_request(request):
+                    req_url = request.url
+                    if "supabase.co" in req_url:
+                        headers = request.headers
+                        key = headers.get("apikey") or headers.get("authorization", "")
+                        api_calls.append((req_url, f"[HEADERS] apikey={key[:60]}"))
+
+                def on_response(response):
+                    req_url = response.url
+                    ct = response.headers.get("content-type", "")
+                    if "json" in ct and any(k in req_url for k in ("supabase", "api", "player", "card", "search", "list")):
+                        try:
+                            body = response.json()
+                            body_preview = json.dumps(body)[:300]
+                        except Exception:
+                            body_preview = ""
+                        api_calls.append((req_url, body_preview))
+
+                page.on("request", on_request)
+                page.on("response", on_response)
+                page.goto(url, timeout=60_000, wait_until="networkidle")
+                page.wait_for_timeout(3000)
+                html = page.content()
+                browser.close()
+        except Exception as exc:
+            logger.error("Playwright probe failed: %s", exc)
+        return html, api_calls
 
     # ── Private ───────────────────────────────────────────────────────────────
 
