@@ -76,10 +76,10 @@ class DBWriter:
             league_id = new_id()
             cur.execute(
                 """
-                INSERT INTO "League" (id, name, abbrev, "createdAt", "updatedAt")
-                VALUES (%s, %s, %s, %s, %s)
+                INSERT INTO "League" (id, name, abbrev)
+                VALUES (%s, %s, %s)
                 """,
-                (league_id, name, abbrev, _now(), _now()),
+                (league_id, name, abbrev),
             )
             self.conn.commit()
             logger.debug("Created league '%s' (%s)", abbrev, league_id)
@@ -105,10 +105,10 @@ class DBWriter:
             team_id = new_id()
             cur.execute(
                 """
-                INSERT INTO "Team" (id, name, abbrev, city, "logoUrl", "leagueId", "createdAt", "updatedAt")
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO "Team" (id, name, abbrev, city, "logoUrl", "leagueId")
+                VALUES (%s, %s, %s, %s, %s, %s)
                 """,
-                (team_id, name, abbrev, city, logo_url, league_id, _now(), _now()),
+                (team_id, name, abbrev, city, logo_url, league_id),
             )
             self.conn.commit()
             logger.debug("Created team '%s' (%s)", abbrev, team_id)
