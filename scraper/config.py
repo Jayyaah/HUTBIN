@@ -19,9 +19,20 @@ DATABASE_URL: str = os.getenv(
 
 # ── Season / URLs ─────────────────────────────────────────────────────────────
 SEASON = "NHL26"
-HUTDB_BASE = "https://www.hut-db.com"
-HUTDB_SEASON_PREFIX = "/26"                        # e.g. /26/players
+HUTDB_BASE = "https://www.hutdb.app"
+HUTDB_SEASON_PREFIX = ""
 NHLHUT_BASE = "https://www.nhlhut.com"
+
+# ── Supabase (hutdb.app backend) ──────────────────────────────────────────────
+SUPABASE_URL = "https://cfahmyecewzymggdoebn.supabase.co"
+SUPABASE_ANON_KEY = (
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+    ".eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYWhteWVjZXd6eW1nZ2RvZWJuIiwicm9sZSI6Im"
+    "Fub24iLCJpYXQiOjE3NzA1ODM4MDksImV4cCI6MjA4NjE1OTgwOX0"
+    ".SBtLCuO4j68fmTLGai5dVJcwkNCr9n2MgoXFcK7HYIM"
+)
+SUPABASE_STORAGE_BASE = f"{SUPABASE_URL}/storage/v1/object/public/assets"
+SUPABASE_BATCH = 1000
 
 # ── Rate limiting ─────────────────────────────────────────────────────────────
 RATE_LIMIT_MIN = 1.0   # seconds between requests (lower bound)
