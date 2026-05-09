@@ -4,5 +4,4 @@ lxml==5.3.0
 psycopg[binary]==3.3.4
 cuid2==2.0.0
 python-dotenv==1.0.1
-# Playwright est optionnel (fallback si le site est rendu en JavaScript)
-# Si nécessaire après --probe : pip install "playwright>=1.45" && playwright install chromium
+playwright>=1.45
